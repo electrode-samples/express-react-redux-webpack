@@ -7,7 +7,7 @@
 
 This application was originally cloned from [erikras/react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example). We have demonstrated the use of 3 features of Electrode Stand alone modules:
 
-* [Electrode Server Side Rendering component caching](electrode-io/electrode-react-ssr-caching)
+* [Electrode Server Side Rendering component caching](https://github.com/electrode-io/electrode-react-ssr-caching)
 * [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
 * [Electrode Above the fold only server render](https://github.com/electrode-io/above-the-fold-only-server-render)
 
