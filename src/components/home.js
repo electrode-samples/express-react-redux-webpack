@@ -7,14 +7,29 @@ export class Home extends React.Component {
         <h1>Hello <a href="https://github.com/electrode-io">Electrode</a></h1>
         <h2>Demonstration Components</h2>
         <ul>
-          <li><a href="/csrf">CSRF protection using electrode-csrf-jwt</a></li>
-          <li><a href="/csrf">CSRF protection using electrode-csrf-jwt</a></li>
           <li className="aboveFold">
             <button>
               <a href="/above-the-fold">
-                Above the Fold Render - increase your App's performance by using a skip prop
+                Above the Fold Render
               </a>
             </button>
+            <p>Increase your App's performance by using a skip prop</p>
+          </li>
+          <li className="ssr simple">
+            <button>
+              <a href="/ssrcachingsimpletype">
+              SSR Caching - Simple
+              </a>
+            </button>
+            <p>Component Props become the cache key. This is useful for cases like Header and Footer where the number of variations of props data is minimal which will make sure the cache size stays small.</p>
+          </li>
+          <li className="ssr caching">
+            <button>
+              <a href="/ssrcachingtemplatetype">
+                SSR Caching- Template Type
+              </a>
+            </button>
+            <p>Components Props are first tokenized and then the generated template html is cached. The idea is akin to generating logic-less handlebars template from your React components and then use string replace to process the template with different props. This is useful for cases like displaying Product information in a Carousel where you have millions of products in the repository.</p>
           </li>
         </ul>
       </div>
