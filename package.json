@@ -90,6 +90,7 @@
     }
   },
   "dependencies": {
+    "above-the-fold-only-server-render": "^1.0.2",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.1",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -118,7 +119,7 @@
     "map-props": "^1.0.0",
     "piping": "^0.3.0",
     "pretty-error": "^1.2.0",
-    "react": "^15.3.0",
+    "react": "^15.3.1",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^15.3.0",
     "react-helmet": "^2.2.0",

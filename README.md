@@ -1,5 +1,9 @@
-# React Redux Universal Hot Example 
+# React Redux Universal Hot Example
 
+- This repo is a sample Electrode app with the following Electrode modules:
+- [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
+- [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
+- [Electrode Above the Fold Rendering](https://github.com/electrode-io/above-the-fold-only-server-render)
 
 ---
 
@@ -24,8 +28,7 @@ npm run build
 npm run start
 ```
 
-## Electrode Server Side Rendering component caching
-
+## <a name="electrode-react-ssr-caching"></a>Electrode Server Side Rendering Component Caching ##
 [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time and component caching to help you speed up SSR.
 
 It supports 2 types of caching:
@@ -35,8 +38,8 @@ It supports 2 types of caching:
 
 To demonstrate functionality,
 
-* Added component `src/components/SSRCachingSimpleType.js` to demostrate Simple strategy. 
-* Added component `src/components/SSRCachingTemplateType.js` to demostrate Template strategy. 
+* Added component `src/components/SSRCachingSimpleType.js` to demostrate Simple strategy.
+* Added component `src/components/SSRCachingTemplateType.js` to demostrate Template strategy.
 * To enable caching using `electrode-react-ssr-caching` we need to do the below configuration:
 
 ```
@@ -100,3 +103,126 @@ Render the html for the given request
       // send full HTML with result back using res
     });
 ```
+---
+## <a name="above-the-fold"></a>Electrode Above the Fold Server Rendering
+[Above the Fold Server Rendering](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or outside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.
+
+[Above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) helps increase performance both by decreasing the load on renderToString and sending the end user a smaller amount of markup.
+
+By default, the [above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) component is an exercise in simplicity; it does nothing and only returns the child component.
+
+### Install
+- Add the `above-the-fold-only-server-render` component:
+
+```bash
+npm install above-the-fold-only-server-render --save
+```
+
+You can tell the component to skip server side rendering either by passing a `prop` `skip={true}` or by setting up `skipServerRender` in your app context and passing the component a `contextKey` `prop`.
+
+You can skip server side rendering by passing a `skip prop`, like `<your-electrode-app>/components/above-fold-simple.jsx`. You can comment out the `<AboveTheFoldOnlyServerRender skip={true}>` (skip prop) and closing tag to see how the `above-the-fold-only-server-render` component is working underneath:
+
+```js
+
+const YourComponent = () => {
+  return (
+    //comment out '<AboveTheFoldOnlyServerRender skip={true}>' tags to toggle SSR of this component'
+    <AboveTheFoldOnlyServerRender skip={true}>
+      <div>This will not be server side rendered.</div>
+    </AboveTheFoldOnlyServerRender>
+  );
+};
+
+```
+
+You can also skip server side rendering by `setting context in your app and passing a contextKey prop`. Here is an example:
+
+```js
+
+const YourComponent = () => {
+    return (
+      <AboveTheFoldOnlyServerRender contextKey="aboveTheFoldOnlyServerRender.SomeComponent">
+        <div>This will not be server side rendered based on the context.</div>
+      </AboveTheFoldOnlyServerRender>
+    );
+};
+
+class YourApp extends React.Component {
+  getChildContext() {
+    return {
+      aboveTheFoldOnlyServerRender: {
+        YourComponent: true
+      }
+    };
+  }
+
+  render() {
+    return (
+      <YourComponent />
+    );
+  }
+}
+
+YourApp.childContextTypes = {
+  aboveTheFoldOnlyServerRender: React.PropTypes.shape({
+    AnotherComponent: React.PropTypes.bool
+  })
+};
+```
+On the Home page, click the link to render the `localhost:3000/above-the-fold` page.
+
+The best way to demo this existing component is actually going to be in your `node_modules.`
+
+Navigate to `<your-electrode-app>/node_modules/above-the-fold-only-server-render/lib/components/above-the-fold-only-server-render.js` line 29:
+
+```javascript
+var SHOW_TIMEOUT = 50;
+```
+
+When we use this module at [WalmartLabs](www.walmartlabs.com), it's all about optimization. You are going to change line 29 to slow down the SHOW_TIMEOUT so you can see the component wrapper in action:
+Change this to:
+
+```javascript
+var SHOW_TIMEOUT = 3000;
+```
+
+Run the commands below and test it out in your app:
+
+```bash
+  npm run build && npm run start
+```
+
+The code in the <h3> tags that are above and below the <AboveTheFoldOnlyServerRender skip={true}> + </AboveTheFoldOnlyServerRender> will render first:
+
+```javascript
+import React from "react";
+import {AboveTheFoldOnlyServerRender} from "above-the-fold-only-server-render";
+
+export class AboveFold extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <h3>Above-the-fold-only-server-render: Increase Your Performance</h3>
+        <AboveTheFoldOnlyServerRender skip={true}>
+            <div className="renderMessage" style={{color: "blue"}}>
+              <p>This will skip server rendering if the 'AboveTheFoldOnlyServerRender'
+                lines are present, or uncommented out.</p>
+              <p>This will be rendered on the server and visible if the 'AboveTheFoldOnlyServerRender'
+                lines are commented out.</p>
+              <p>Try manually toggling this component to see it in action</p>
+              <p>
+                <a href="https://github.com/electrode-io/above-the-fold-only-server-render"
+                  target="_blank">Read more about this module and see our live demo
+                </a>
+              </p>
+            </div>
+        </AboveTheFoldOnlyServerRender>
+        <h3>This is below the 'Above the fold closing tag'</h3>
+      </div>
+    );
+  }
+}
+```
+
+To learn more about this essential stand alone module  visit the `above-the-fold-only-server-render` [Github repo](https://github.com/electrode-io/above-the-fold-only-server-render).
