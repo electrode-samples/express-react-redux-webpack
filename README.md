@@ -194,7 +194,7 @@ Run the commands below and test it out in your app:
 
 The code in the <h3> tags that are above and below the <AboveTheFoldOnlyServerRender skip={true}> + </AboveTheFoldOnlyServerRender> will render first:
 
-
+```javascript
 import React from "react";
 import {AboveTheFoldOnlyServerRender} from "above-the-fold-only-server-render";
 
@@ -223,7 +223,6 @@ export class AboveFold extends React.Component {
     );
   }
 }
-
 ```
 
 To learn more about this essential stand alone module  visit the `above-the-fold-only-server-render` [Github repo](https://github.com/electrode-io/above-the-fold-only-server-render).
