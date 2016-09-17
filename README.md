@@ -1,6 +1,6 @@
 # React Redux Universal Hot Example
 
-- This repo is a sample Express Universal app with the following Electrode modules:
+This repo is a sample Express Universal app with the following Electrode modules:
 - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
 - [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
 - [Electrode Above the Fold Rendering](https://github.com/electrode-io/above-the-fold-only-server-render)
@@ -37,13 +37,22 @@ It supports 2 types of caching:
 * Simple - Component Props become the cache key. This is useful for cases like Header and Footer, where the number of variations of props data is minimal which will make sure the cache size stays small.
 * Template - Components Props are first tokenized and then the generated template html is cached. The idea is akin to generating logic-less handlebars template from your React components and then use string replace to process the template with different props. This is useful for cases like displaying Product information in a Carousel where you have millions of products in the repository.
 
-To demonstrate functionality, there is:
+### Install
+```bash
+$ npm install --save electrode-react-ssr-caching
+```
 
-* An added component `client/components/SSRCachingSimpleType.jsx` to demostrate Simple strategy.
-* An added component `client/components/SSRCachingTemplateType.jsx` to demostrate Template strategy.
+### Wiring
+*GOTCHA:
+SSR CACHING OF COMPONENTS ONLY WORKS IN PRODUCTION MODE, SINCE THE PROPS(WHICH ARE READ ONLY) ARE MUTATED FOR CACHING PURPOSES AND MUTATING THE PROPS IS NOT ALLOWED IN DEVELOPMENT MODE BY REACT*
+
+To demonstrate functionality, we have added:
+
+* `client/components/SSRCachingSimpleType.jsx` for Simple strategy.
+* `client/components/SSRCachingTemplateType.jsx` for Template strategy.
 * To enable caching using `electrode-react-ssr-caching`, we need to do the below configuration:
 
-```
+```javascript
   const cacheConfig = {
     components: {
       SSRCachingTemplateType: {
@@ -63,7 +72,7 @@ To demonstrate functionality, there is:
 
 The above configuration is done in `server/index.js`.
 
-To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching)
+To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching). The core implementation for caching is [available here](https://github.com/electrode-io/electrode-react-ssr-caching/blob/master/lib/ssr-caching.js). You can also do [Profiling of components](https://github.com/electrode-io/electrode-react-ssr-caching#profiling) 
 
 ---
 ## <a name="redux-router-engine"></a>Electrode Redux Router Engine ##
@@ -72,8 +81,9 @@ To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-i
 
 The wiring is done in the following way:
 
+> Creation of REDUX store which returns a promise eventually resolving to a constructed redux store
+
 ```javascript
-Creation of REDUX store which returns a promise eventually resolving to a constructed redux store
 
 function createReduxStore(req, match) {
   let initialState = {count : 100};
@@ -89,16 +99,14 @@ function createReduxStore(req, match) {
 }
 ```
 
-```javascript
-Initialization of ReduxRouterEngine with routes and createReduxStore function
+>Initialization of ReduxRouterEngine with routes and createReduxStore function
 
+```javascript
 const engine = new ReduxRouterEngine({ routes, createReduxStore});
-
 ```
+>Render the html for the given request
 
 ```javascript
-Render the html for the given request
-
  engine.render(req)
     .then( (result) => {
       // send full HTML with result back using res
@@ -145,7 +153,7 @@ Run the commands below and test it out in your app:
   npm run build && npm run start
 ```
 
-The code in the <h3> tags that are above and below the <AboveTheFoldOnlyServerRender skip={true}> + </AboveTheFoldOnlyServerRender> will render first:
+The code in the `<h3>` tags that are above and below the `<AboveTheFoldOnlyServerRender skip={true}>  </AboveTheFoldOnlyServerRender>` will render first:
 
 ```javascript
 import React from "react";
