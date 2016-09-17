@@ -133,11 +133,11 @@ npm install above-the-fold-only-server-render --save
 You can tell the component to skip server side rendering either by passing a `prop` `skip={true}` or by setting up `skipServerRender` in your app context and passing the component a `contextKey` `prop`.
 
 Let's explore passing `skip prop`; there is an example in
-`<your-electrode-app>/components/above-fold-simple.jsx`. On the Home page, click the link to render the `localhost:3000/above-the-fold` page.
+`<your-express-app>/components/above-fold-simple.jsx`. On the Home page, click the link to render the `localhost:3000/above-the-fold` page.
 
 The best way to demo this existing component is actually going to be in your `node_modules.`
 
-Navigate to `<your-electrode-app>/node_modules/above-the-fold-only-server-render/lib/components/above-the-fold-only-server-render.js` line 29:
+Navigate to `<your-express-app>/node_modules/above-the-fold-only-server-render/lib/components/above-the-fold-only-server-render.js` line 29:
 
 ```javascript
 var SHOW_TIMEOUT = 50;
