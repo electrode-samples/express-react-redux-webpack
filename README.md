@@ -3,7 +3,7 @@
 This repo is a sample Express Universal app with the following Electrode modules:
 - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
 - [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
-- [Electrode Above the Fold Rendering](https://github.com/electrode-io/above-the-fold-only-server-render)
+- [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
 
 ---
 
@@ -116,8 +116,8 @@ const engine = new ReduxRouterEngine({ routes, createReduxStore});
     });
 ```
 ---
-## <a name="above-the-fold"></a>Electrode Above the Fold Server Rendering
-[Above the Fold Server Rendering](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or outside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.
+## <a name="above-the-fold-only-server-render"></a>Above The Fold Only Server Render
+[Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or inside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.
 
 [Above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) helps increase performance both by decreasing the load on renderToString and sending the end user a smaller amount of markup.
 
