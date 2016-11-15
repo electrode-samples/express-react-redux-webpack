@@ -75,7 +75,7 @@ To demonstrate functionality, we have added:
 
 The above configuration is done in `server/index.js`.
 
-To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching). The core implementation for caching is [available here](https://github.com/electrode-io/electrode-react-ssr-caching/blob/master/lib/ssr-caching.js). You can also do [Profiling of components](https://github.com/electrode-io/electrode-react-ssr-caching#profiling) 
+To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching). The core implementation for caching is [available here](https://github.com/electrode-io/electrode-react-ssr-caching/blob/master/lib/ssr-caching.js). You can also do [Profiling of components](https://github.com/electrode-io/electrode-react-ssr-caching#profiling)
 
 ---
 ## <a name="redux-router-engine"></a>Electrode Redux Router Engine ##
@@ -225,3 +225,5 @@ YourApp.childContextTypes = {
 ```
 
 To learn more about this essential stand alone module  visit the `above-the-fold-only-server-render` [Github repo](https://github.com/electrode-io/above-the-fold-only-server-render).
+
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
