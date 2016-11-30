@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ReactDOM from 'react-dom/server';
+import ReactDOM from 'react-dom/server'; // eslint-disable-line no-unused-vars
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 
